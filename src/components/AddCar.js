@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function AddCar() {
   return (
@@ -114,12 +115,13 @@ function AddCar() {
       </form>
       <div className="md:flex md:items-center mt-5">
         <div className="">
-          <button
+          <Link
+            to="/ListCar"
             className="shadow bg-white hover:bg-slate-200 focus:shadow-outline focus:outline-none text-blue-700 font-bold py-2 px-4 rounded"
             type="button"
           >
             Cancel
-          </button>
+          </Link>
         </div>
         <div className="pl-4">
           <button

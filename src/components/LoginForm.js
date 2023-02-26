@@ -75,7 +75,10 @@ const LoginForm = () => {
               <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-7/12 mb-12 md:mb-0">
                 <p
                   ref={errRef}
-                  className={errMsg ? "errms" : "offscree"}
+                  className={
+                    (errMsg ? "errms" : "offscree") +
+                    " text-red-500 text-left font-bold"
+                  }
                   aria-live="assertive"
                 >
                   {errMsg}
