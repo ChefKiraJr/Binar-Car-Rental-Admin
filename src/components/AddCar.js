@@ -11,10 +11,10 @@ function AddCar() {
       <div>
         <p className="font-bold text-left py-8 text-2xl">Add New Car</p>
       </div>
-      <form className="pl-8 pr-[700px] py-8 rounded bg-white">
+      <form className="lg:pl-8 lg:pr-[700px] py-8 rounded bg-white">
         <div className="md:flex mb-6 items-center">
           <div className="md:w-1/3">
-            <label className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4">
+            <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
               Nama/Tipe Mobil
             </label>
           </div>
@@ -30,10 +30,7 @@ function AddCar() {
         </div>
         <div className="md:flex mb-6 items-center">
           <div className="md:w-1/3">
-            <label
-              className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4"
-              for="my-textfield"
-            >
+            <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
               Harga
             </label>
           </div>
@@ -49,7 +46,7 @@ function AddCar() {
         </div>
         <div className="md:flex mb-6">
           <div className="md:w-1/3 mt-2">
-            <label className="block text-gray-600 font-normal md:text-left md:mb-0 pr-4">
+            <label className="block text-gray-600 font-normal text-left md:mb-0 pr-4">
               Foto
             </label>
           </div>
@@ -67,8 +64,8 @@ function AddCar() {
           </div>
         </div>
         <div className="md:flex mb-6 items-center">
-          <div className="md:w-1/3">
-            <label className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4">
+          <div className="w-1/3">
+            <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
               Kategori
             </label>
           </div>
@@ -86,25 +83,19 @@ function AddCar() {
             </select>
           </div>
         </div>
-        <div className="md:flex mb-6">
+        <div className="flex mb-6">
           <div className="md:w-1/3">
-            <label
-              className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4"
-              for="my-textarea"
-            >
+            <label className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4">
               Created at
             </label>
           </div>
-          <div className="md:w-2/3">
+          <div className="w-2/3">
             <p className="text-left">-</p>
           </div>
         </div>
-        <div className="md:flex mb-6">
+        <div className="flex mb-6">
           <div className="md:w-1/3">
-            <label
-              className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4"
-              for="my-textarea"
-            >
+            <label className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4">
               Updated at
             </label>
           </div>
@@ -113,7 +104,7 @@ function AddCar() {
           </div>
         </div>
       </form>
-      <div className="md:flex md:items-center mt-5">
+      <div className="flex md:items-center mt-5">
         <div className="">
           <Link
             to="/ListCar"
