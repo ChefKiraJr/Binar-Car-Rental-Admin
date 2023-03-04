@@ -1,5 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import AddCar from "../components/AddCar";
+import EditCars from "../pages/EditCar";
 import Dashboard from "../pages/Dashboard";
 import ListCars from "../pages/ListCars";
 import ListCars2 from "../pages/ListCars2";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
           {
             path: "add",
             element: <AddCar />,
+          },
+          {
+            path: "edit/:id",
+            element: <EditCars />,
           },
         ],
       },

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Chart from "../components/Chart";
-import LoginForm from "../components/LoginForm";
 import Pagination from "../components/Pagination";
 import Table from "../components/Table";
 import TableSetting from "../components/TableSetting";
