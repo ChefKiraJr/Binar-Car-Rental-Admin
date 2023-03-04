@@ -1,7 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function AddCar() {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState();
+  const [category, setCategory] = useState();
+  const navigate = useNavigate();
+
+  console.log(name);
+  console.log(price);
+  console.log(image);
+  console.log(category);
+
+  const sendData = () => {
+    const bodyFormData = new FormData();
+    bodyFormData.append("image", image);
+    bodyFormData.append("name", name);
+    bodyFormData.append("price", price);
+    bodyFormData.append("category", category);
+    axios
+      .post(
+        "https://bootcamp-rent-cars.herokuapp.com/admin/car",
+        bodyFormData,
+        {
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        }
+      )
+      .then(
+        (response) => {
+          var response = response.data;
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        },
+        alert("Berhassil ditambah"),
+        navigate("/list")
+      );
+  };
+  // console.log(image);
+
   return (
     <div className="p-8 lg:mt-0 shadow bg-slate-300 h-screen">
       <div className="flex">
@@ -11,7 +53,7 @@ function AddCar() {
       <div>
         <p className="font-bold text-left py-8 text-2xl">Add New Car</p>
       </div>
-      <form className="lg:pl-8 lg:pr-[700px] py-8 rounded bg-white">
+      <form className="lg:pl-8 lg:pr-[400px] py-8 rounded bg-white">
         <div className="md:flex mb-6 items-center">
           <div className="md:w-1/3">
             <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
@@ -24,6 +66,7 @@ function AddCar() {
               id="namaMobil"
               type="text"
               placeholder="Input Nama/Tipe Mobil"
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
@@ -40,6 +83,7 @@ function AddCar() {
               id="hargaMobil"
               type="text"
               placeholder="Input Harga Sewa Mobil"
+              onChange={(e) => setPrice(e.target.value)}
               required
             />
           </div>
@@ -56,6 +100,7 @@ function AddCar() {
               id="fotoMobil"
               type="file"
               placeholder="Upload Foto Mobil"
+              onChange={(e) => setImage(e.target.files[0])}
               required
             />
             <p className="text-left text-sm text-slate-500">
@@ -74,6 +119,7 @@ function AddCar() {
               name=""
               className="form-select block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="my-select"
+              onChange={(e) => setCategory(e.target.value)}
               required
             >
               <option value="Default">Pilih Kategori Mobil</option>
@@ -107,7 +153,7 @@ function AddCar() {
       <div className="flex md:items-center mt-5">
         <div className="">
           <Link
-            to="/ListCar"
+            to="/list"
             className="shadow bg-white hover:bg-slate-200 focus:shadow-outline focus:outline-none text-blue-700 font-bold py-2 px-4 rounded"
             type="button"
           >
@@ -117,7 +163,8 @@ function AddCar() {
         <div className="pl-4">
           <button
             className="shadow bg-blue-700 hover:bg-blue-900 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button"
+            type="submit"
+            onClick={sendData}
           >
             Save
           </button>
