@@ -2,8 +2,7 @@ import React, { useRef, useEffect, useState, useContext } from "react";
 import authContext from "../context/AuthProvider";
 import Logo from "../assets/loginImg.png";
 import axios from "../api/axios";
-import Dashboard from "../pages/Dashboard";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LOGIN_URL = "/admin/auth/login";
 
@@ -35,7 +34,6 @@ const LoginForm = () => {
         JSON.stringify({ email, password }),
         {
           headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
         }
       );
       console.log(response.data, "dari resssss");
@@ -66,15 +64,18 @@ const LoginForm = () => {
 
   return (
     <section className="h-screen">
-      <div className="px-6 h-full text-gray-800">
-        <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
+      <div className="pr-6">
+        <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full">
           <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-7/12 lg:w-7/12 md:w-10/12 mb-12 md:mb-0">
-            <img src={Logo} className="object-fill w-67 h-67" alt="img" />
+            <img src={Logo} className="h-screen" alt="img" />
           </div>
           <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-7/12 mb-12 md:mb-0">
             <p
               ref={errRef}
-              className={errMsg ? "errms" : "offscree"}
+              className={
+                (errMsg ? "errms" : "offscree") +
+                " text-red-500 text-left font-bold"
+              }
               aria-live="assertive"
             >
               {errMsg}
