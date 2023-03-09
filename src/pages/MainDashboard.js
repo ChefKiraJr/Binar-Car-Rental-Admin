@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Chart from "../components/Chart";
 import Pagination from "../components/Pagination";
-import Table from "../components/Table";
+import MainTable from "../components/MainTable";
 import TableSetting from "../components/TableSetting";
 import useDatas from "../store/data";
 
@@ -22,11 +22,11 @@ function MainDashboard() {
         })}
       </p> */}
       <Chart />
-      <Table data={data} />
-      <div className="flex justify-between">
+      <MainTable data={data} />
+      {/* <div className="flex justify-between">
         <TableSetting />
         <Pagination />
-      </div>
+      </div> */}
     </div>
   );
 }
