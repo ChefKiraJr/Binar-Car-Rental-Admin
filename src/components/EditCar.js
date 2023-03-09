@@ -29,8 +29,6 @@ function TestEdit() {
     }
     sendListData();
   }, []);
-  console.log(params.id);
-  console.log(name + " " + price + " " + category + " " + image);
 
   const sendData = () => {
     const bodyFormData = new FormData();
@@ -72,7 +70,7 @@ function TestEdit() {
   }, []);
 
   return (
-    <div className="p-8 lg:mt-0 shadow bg-slate-300 h-screen">
+    <div className="p-8 lg:mt-0 shadow bg-slate-300 h-max-screen">
       <div className="flex">
         <p className="font-bold">Cars &gt; List Car &gt;</p>
         <p className="font-normal pl-2"> Edit Car</p>
@@ -80,10 +78,10 @@ function TestEdit() {
       <div>
         <p className="font-bold text-left py-8 text-2xl">Edit Car</p>
       </div>
-      <form className="lg:pl-8 lg:pr-[400px] py-8 rounded bg-white">
+      <form className="lg:pl-4 lg:pr-[400px] py-8 rounded bg-white sm:pl-2">
         <div className="md:flex mb-6 items-center">
           <div className="md:w-1/3">
-            <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
+            <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 lg:pr-4">
               Nama/Tipe Mobil
             </label>
           </div>
@@ -126,7 +124,6 @@ function TestEdit() {
               className="form-input block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="fotoMobil"
               type="file"
-              // value={image}
               onChange={(e) => setImage(e.target.files[0])}
               required
             />
