@@ -9,11 +9,6 @@ function AddCar() {
   const [category, setCategory] = useState();
   const navigate = useNavigate();
 
-  console.log(name);
-  console.log(price);
-  console.log(image);
-  console.log(category);
-
   const sendData = () => {
     const bodyFormData = new FormData();
     bodyFormData.append("image", image);
@@ -38,14 +33,13 @@ function AddCar() {
         (error) => {
           console.log(error);
         },
-        alert("Berhassil ditambah"),
+        alert("Berhasil ditambah"),
         navigate("/list")
       );
   };
-  // console.log(image);
 
   return (
-    <div className="p-8 lg:mt-0 shadow bg-slate-300 h-screen">
+    <div className="p-8 lg:mt-0 shadow bg-slate-300 h-max-screen">
       <div className="flex">
         <p className="font-bold">Cars &gt; List Car &gt;</p>
         <p className="font-normal pl-2"> Add New Car</p>

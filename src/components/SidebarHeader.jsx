@@ -12,7 +12,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden transition-all transform bg-[#0D28A6] border-r shadow-lg lg:z-auto lg:static lg:shadow-none"
+      className="fixed hidden inset-y-0 z-10 lg:flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden transition-all transform bg-[#0D28A6] border-r shadow-lg lg:z-auto lg:static lg:shadow-none"
       id="sidebar-menu"
     >
       <div className="flex items-center justify-between flex-shrink-0 p-2 mr-16">

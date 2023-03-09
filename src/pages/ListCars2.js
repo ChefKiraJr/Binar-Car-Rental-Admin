@@ -6,45 +6,46 @@ import Hapus from "../assets/fi_trash-2.png";
 import Edit from "../assets/fi_edit.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import useListCar from "../store/listCar";
 
 function ListCars2() {
-  const [cars, setCars] = useState([]);
   const [filteredCars, setFilteredCars] = useState([]);
   const [category, setCategory] = useState("all");
+  const { listCars, setList } = useListCar((state) => state);
 
   //Get List data
+  async function getCarData() {
+    const request = await fetch(
+      "https://bootcamp-rent-cars.herokuapp.com/admin/v2/car?pageSize=50",
+      {
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      }
+    );
+    const response = await request.json();
+    setList({ data: response.cars });
+  }
+
   useEffect(() => {
-    async function getCarData() {
-      const request = await fetch(
-        "https://bootcamp-rent-cars.herokuapp.com/admin/v2/car?pageSize=50",
+    getCarData();
+  }, []);
+
+  const deletePost = async (userId) => {
+    try {
+      const respone = await axios.delete(
+        `https://bootcamp-rent-cars.herokuapp.com/admin/car/${userId}`,
         {
           headers: {
             access_token: localStorage.access_token,
           },
         }
       );
-      const response = await request.json();
-      setCars(response.cars);
+      alert("Hapus Berhasil");
+      getCarData();
+    } catch (error) {
+      console.log(error);
     }
-    getCarData();
-  }, []);
-
-  // const deletePost = (id) => {
-  //   axios.delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`);
-  //   setCars(cars.filter((item) => item.id !== cars.id));
-  // };
-
-  const deletePost = (id) => {
-    axios
-      .delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`, {
-        headers: {
-          access_token: localStorage.access_token,
-        },
-      })
-      .then(() => {
-        alert(id, "Deleted");
-      });
-    alert(id);
   };
 
   //Replace Value Category
@@ -62,17 +63,17 @@ function ListCars2() {
   const handleButton = (e) => {
     let test;
     if (e.target.value === "all") {
-      test = cars;
+      test = listCars;
     } else {
-      test = cars.filter((item) => item.category === e.target.value);
+      test = listCars.filter((item) => item.category === e.target.value);
     }
     setCategory(e.target.value);
     setFilteredCars(test);
   };
 
   const setID = (id) => {
-    alert(id);
-    console.log(id);
+    // alert(id);
+    // console.log(id);
     localStorage.setItem("ID", id);
   };
 
@@ -99,7 +100,7 @@ function ListCars2() {
               <button
                 className="flex items-center w-full bg-white h-10 rounded outline outline-red-300 text-red-300 py-2 px-4"
                 type="button"
-                onClick={deletePost}
+                onClick={() => deletePost(item.id)}
               >
                 <img src={Hapus} alt="img" />
                 <p className="pl-2 font-bold">Delete</p>
@@ -123,7 +124,7 @@ function ListCars2() {
   };
 
   return (
-    <div className="p-8 lg:mt-0 shadow bg-slate-300 sm:h-min-screen lg:h-max-screen">
+    <div className="p-8 lg:mt-0 shadow bg-slate-300 h-max w-full">
       <div className="flex">
         <p className="font-bold">Cars &gt;</p>
         <p className="font-normal pl-2"> List Car</p>
@@ -140,7 +141,7 @@ function ListCars2() {
       </div>
       <div className="flex gap-4">
         <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-blue-400 focus:shadow-outline focus:bg-blue-100 text-blue-400 font-bold py-2 px-4 rounded"
+          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
           type="button"
           value="all"
           onClick={handleButton}
@@ -148,7 +149,7 @@ function ListCars2() {
           All
         </button>
         <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-blue-400 focus:shadow-outline focus:bg-blue-100 text-blue-400 font-bold py-2 px-4 rounded"
+          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
           type="button"
           value="small"
           onClick={handleButton}
@@ -156,7 +157,7 @@ function ListCars2() {
           2 - 4 Orang
         </button>
         <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-blue-400 focus:shadow-outline focus:bg-blue-100 text-blue-400 font-bold py-2 px-4 rounded"
+          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
           type="button"
           value="medium"
           onClick={handleButton}
@@ -164,7 +165,7 @@ function ListCars2() {
           4 - 6 Orang
         </button>
         <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-blue-400 focus:shadow-outline focus:bg-blue-100 text-blue-400 font-bold py-2 px-4 rounded"
+          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
           type="button"
           value="large"
           onClick={handleButton}
@@ -174,8 +175,8 @@ function ListCars2() {
       </div>
       <div className="grid grid-cols-1 py-4 gap-y-8 lg:grid-cols-3 md:grid-cols-2">
         {category === "all" &&
-          cars.length > 0 &&
-          cars.map((item) => renderCarItem(item))}
+          listCars.length > 0 &&
+          listCars.map((item) => renderCarItem(item))}
         {category !== "all" &&
           filteredCars.length > 0 &&
           filteredCars.map((item) => renderCarItem(item))}
