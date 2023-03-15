@@ -11,7 +11,7 @@ import useListCar from "../store/listCar";
 function ListCars2() {
   const [filteredCars, setFilteredCars] = useState([]);
   const [category, setCategory] = useState("all");
-  const { listCars, setList } = useListCar((state) => state);
+  const { listCars, setList, deleteCar } = useListCar((state) => state);
 
   //Get List data
   async function getCarData() {
@@ -42,7 +42,7 @@ function ListCars2() {
         }
       );
       alert("Hapus Berhasil");
-      getCarData();
+      deleteCar({ id: userId });
     } catch (error) {
       console.log(error);
     }
@@ -72,8 +72,6 @@ function ListCars2() {
   };
 
   const setID = (id) => {
-    // alert(id);
-    // console.log(id);
     localStorage.setItem("ID", id);
   };
 
@@ -133,7 +131,7 @@ function ListCars2() {
         <p className="font-bold text-left py-8 text-2xl">List Car</p>
         <Link
           to="add"
-          className="flex bg-blue-600 h-10 rounded text-white py-2 px-2 mr-2"
+          className="flex bg-blue-800 h-10 rounded text-white py-2 px-2 mr-2"
         >
           <img src={Logo} alt="img" className="pr-2"></img>
           <p>Add New Car</p>
