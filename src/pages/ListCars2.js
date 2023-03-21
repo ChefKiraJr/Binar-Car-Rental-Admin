@@ -54,7 +54,7 @@ function ListCars2() {
         }
       );
       setModal(false);
-      setToast("Data Berhasil Disimpan");
+      setToast("Data Berhasil Dihapus");
       deleteCar({ id: userId });
       getCarData();
     } catch (error) {
@@ -86,8 +86,6 @@ function ListCars2() {
   };
 
   const setID = (id) => {
-    // alert(id);
-    // console.log(id);
     localStorage.setItem("ID", id);
   };
 

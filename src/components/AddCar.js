@@ -34,10 +34,10 @@ function AddCar() {
           var hasil = response.data;
           console.log("hasil", hasil);
         },
+
         (error) => {
           console.log(error);
         },
-        alert("Berhasil ditambah"),
         navigate("/list")
       );
   };
