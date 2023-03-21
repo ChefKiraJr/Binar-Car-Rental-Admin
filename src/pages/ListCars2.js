@@ -7,11 +7,18 @@ import Edit from "../assets/fi_edit.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import useListCar from "../store/listCar";
+import Modal from "../components/Modal";
+import DeleteCars from "../components/DeleteCars";
+import Toast from "../components/Toast";
 
 function ListCars2() {
   const [filteredCars, setFilteredCars] = useState([]);
   const [category, setCategory] = useState("all");
   const { listCars, setList, deleteCar } = useListCar((state) => state);
+  const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
+  const [id, setId] = useState("");
+  const [toast, setToast] = useState("");
 
   //Get List data
   async function getCarData() {
@@ -31,6 +38,11 @@ function ListCars2() {
     getCarData();
   }, []);
 
+  const onClickShowModalDelete = (id) => {
+    setModal(true);
+    setId(id);
+  };
+
   const deletePost = async (userId) => {
     try {
       const respone = await axios.delete(
@@ -41,8 +53,10 @@ function ListCars2() {
           },
         }
       );
-      alert("Hapus Berhasil");
+      setModal(false);
+      setToast("Data Berhasil Disimpan");
       deleteCar({ id: userId });
+      getCarData();
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +86,8 @@ function ListCars2() {
   };
 
   const setID = (id) => {
+    // alert(id);
+    // console.log(id);
     localStorage.setItem("ID", id);
   };
 
@@ -98,7 +114,7 @@ function ListCars2() {
               <button
                 className="flex items-center w-full bg-white h-10 rounded outline outline-red-300 text-red-300 py-2 px-4"
                 type="button"
-                onClick={() => deletePost(item.id)}
+                onClick={() => onClickShowModalDelete(item.id)}
               >
                 <img src={Hapus} alt="img" />
                 <p className="pl-2 font-bold">Delete</p>
@@ -122,64 +138,80 @@ function ListCars2() {
   };
 
   return (
-    <div className="p-8 lg:mt-0 shadow bg-slate-300 h-max w-full">
-      <div className="flex">
-        <p className="font-bold">Cars &gt;</p>
-        <p className="font-normal pl-2"> List Car</p>
+    <>
+      {modal === true ? (
+        <Modal
+          content={
+            <DeleteCars
+              modalActive={modal}
+              setModalActive={setModal}
+              deletePost={() => deletePost(id)}
+            />
+          }
+        />
+      ) : null}
+      {toast === "" ? null : <Toast message={toast} status={"success"} />}
+
+      <div className="p-8 lg:mt-0 shadow bg-slate-300 h-max w-full">
+        <div className="flex">
+          <p className="font-bold">Cars &gt;</p>
+          <p className="font-normal pl-2"> List Car</p>
+        </div>
+        <div className="flex justify-between items-center">
+          <p className="font-bold text-left py-8 text-2xl">List Car</p>
+          <Link
+            to="add"
+            className="flex bg-blue-600 h-10 rounded text-white py-2 px-2 mr-2"
+          >
+            <img src={Logo} alt="img" className="pr-2"></img>
+            <p>Add New Car</p>
+          </Link>
+        </div>
+        <div className="flex gap-4">
+          <button
+            className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
+            type="button"
+            value="all"
+            onClick={handleButton}
+          >
+            All
+          </button>
+          <button
+            className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
+            type="button"
+            value="small"
+            onClick={handleButton}
+          >
+            2 - 4 Orang
+          </button>
+          <button
+            className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
+            type="button"
+            value="medium"
+            onClick={handleButton}
+          >
+            4 - 6 Orang
+          </button>
+          <button
+            className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
+            type="button"
+            value="large"
+            onClick={handleButton}
+          >
+            6 - 8 Orang
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 py-4 gap-y-8 lg:grid-cols-3 md:grid-cols-2">
+          {category === "all" &&
+            listCars.length > 0 &&
+            listCars.map((item) => renderCarItem(item))}
+          {category !== "all" &&
+            filteredCars.length > 0 &&
+            filteredCars.map((item) => renderCarItem(item))}
+        </div>
       </div>
-      <div className="flex justify-between items-center">
-        <p className="font-bold text-left py-8 text-2xl">List Car</p>
-        <Link
-          to="add"
-          className="flex bg-blue-800 h-10 rounded text-white py-2 px-2 mr-2"
-        >
-          <img src={Logo} alt="img" className="pr-2"></img>
-          <p>Add New Car</p>
-        </Link>
-      </div>
-      <div className="flex gap-4">
-        <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
-          type="button"
-          value="all"
-          onClick={handleButton}
-        >
-          All
-        </button>
-        <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
-          type="button"
-          value="small"
-          onClick={handleButton}
-        >
-          2 - 4 Orang
-        </button>
-        <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
-          type="button"
-          value="medium"
-          onClick={handleButton}
-        >
-          4 - 6 Orang
-        </button>
-        <button
-          className="shadow bg-white hover:bg-slate-200 outline outline-2 outline-blue-400 focus:outline-blue-800 focus:text-blue-800  focus:bg-blue-300 text-blue-400 font-bold py-2 px-4 rounded"
-          type="button"
-          value="large"
-          onClick={handleButton}
-        >
-          6 - 8 Orang
-        </button>
-      </div>
-      <div className="grid grid-cols-1 py-4 gap-y-8 lg:grid-cols-3 md:grid-cols-2">
-        {category === "all" &&
-          listCars.length > 0 &&
-          listCars.map((item) => renderCarItem(item))}
-        {category !== "all" &&
-          filteredCars.length > 0 &&
-          filteredCars.map((item) => renderCarItem(item))}
-      </div>
-    </div>
+    </>
   );
 }
 
