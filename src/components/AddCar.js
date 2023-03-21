@@ -1,39 +1,43 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import useListCar from "../store/listCar";
 
 function AddCar() {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [image, setImage] = useState();
   const [category, setCategory] = useState();
+  const { listCars, addCar } = useListCar((state) => state);
   const navigate = useNavigate();
 
   const sendData = () => {
-    const bodyFormData = new FormData();
+    let bodyFormData = new FormData();
     bodyFormData.append("image", image);
     bodyFormData.append("name", name);
     bodyFormData.append("price", price);
     bodyFormData.append("category", category);
+
     axios
       .post(
         "https://bootcamp-rent-cars.herokuapp.com/admin/car",
         bodyFormData,
         {
           headers: {
-            access_token: localStorage.access_token,
+            access_token: localStorage.getItem("access_token"),
+            "content-type": "multipart/form-data",
           },
         }
       )
       .then(
         (response) => {
-          var response = response.data;
-          console.log(response);
+          var hasil = response.data;
+          console.log("hasil", hasil);
         },
+
         (error) => {
           console.log(error);
         },
-        alert("Berhasil ditambah"),
         navigate("/list")
       );
   };
@@ -75,9 +79,9 @@ function AddCar() {
             <input
               className="form-input block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="hargaMobil"
-              type="text"
+              type="number"
               placeholder="Input Harga Sewa Mobil"
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(Number(e.target.value))}
               required
             />
           </div>

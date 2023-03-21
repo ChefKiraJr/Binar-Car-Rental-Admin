@@ -38,10 +38,11 @@ const LoginForm = () => {
       );
       console.log(response.data, "dari resssss");
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.accessToken;
+      const accessToken = response?.data?.access_token;
       const roles = response?.data?.roles;
-      localStorage.setItem("access_token", response.data.access_token);
+      localStorage.setItem("access_token", accessToken);
       localStorage.setItem("username", response.data.email);
+      console.log(localStorage.getItem("access_token"));
       navigate("/");
 
       setAuth({ email, password, roles, accessToken });
