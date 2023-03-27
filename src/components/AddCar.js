@@ -33,17 +33,16 @@ function AddCar() {
         (response) => {
           var hasil = response.data;
           console.log("hasil", hasil);
+          navigate("/list");
         },
-
         (error) => {
           console.log(error);
-        },
-        navigate("/list")
+        }
       );
   };
 
   return (
-    <div className="p-8 lg:mt-0 shadow bg-slate-300 h-max-screen">
+    <div className="p-8 lg:mt-0 shadow bg-slate-300 min-h-full">
       <div className="flex">
         <p className="font-bold">Cars &gt; List Car &gt;</p>
         <p className="font-normal pl-2"> Add New Car</p>
@@ -52,7 +51,7 @@ function AddCar() {
         <p className="font-bold text-left py-8 text-2xl">Add New Car</p>
       </div>
       <form className="lg:pl-8 lg:pr-[400px] py-8 rounded bg-white">
-        <div className="md:flex mb-6 items-center">
+        <div className="md:flex mb-6 items-center lg:px-0 px-4">
           <div className="md:w-1/3">
             <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
               Nama/Tipe Mobil
@@ -69,7 +68,7 @@ function AddCar() {
             />
           </div>
         </div>
-        <div className="md:flex mb-6 items-center">
+        <div className="md:flex mb-6 items-center lg:px-0 px-4">
           <div className="md:w-1/3">
             <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
               Harga
@@ -86,7 +85,7 @@ function AddCar() {
             />
           </div>
         </div>
-        <div className="md:flex mb-6">
+        <div className="md:flex mb-6 lg:px-0 px-4">
           <div className="md:w-1/3 mt-2">
             <label className="block text-gray-600 font-normal text-left md:mb-0 pr-4">
               Foto
@@ -106,7 +105,7 @@ function AddCar() {
             </p>
           </div>
         </div>
-        <div className="md:flex mb-6 items-center">
+        <div className="md:flex mb-6 items-center lg:px-0 px-4">
           <div className="w-1/3">
             <label className="block text-gray-600 font-normal text-left mb-3 md:mb-0 pr-4">
               Kategori
@@ -127,7 +126,7 @@ function AddCar() {
             </select>
           </div>
         </div>
-        <div className="flex mb-6">
+        <div className="flex mb-6 lg:px-0 px-4">
           <div className="md:w-1/3">
             <label className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4">
               Created at
@@ -137,7 +136,7 @@ function AddCar() {
             <p className="text-left">-</p>
           </div>
         </div>
-        <div className="flex mb-6">
+        <div className="flex mb-6 lg:px-0 px-4">
           <div className="md:w-1/3">
             <label className="block text-gray-600 font-normal md:text-left mb-3 md:mb-0 pr-4">
               Updated at
