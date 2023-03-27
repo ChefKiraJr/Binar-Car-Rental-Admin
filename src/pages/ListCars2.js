@@ -4,7 +4,7 @@ import User from "../assets/fi_users.png";
 import Clock from "../assets/fi_clock.png";
 import Hapus from "../assets/fi_trash-2.png";
 import Edit from "../assets/fi_edit.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import useListCar from "../store/listCar";
 import Modal from "../components/Modal";
@@ -15,6 +15,7 @@ import { useOutletContext } from "react-router-dom";
 function ListCars2({ keyword }) {
   const [filteredCars, setFilteredCars] = useState([]);
   const [category, setCategory] = useState("all");
+  const location = useLocation()
   const { listCars, setList, deleteCar } = useListCar((state) => state);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
@@ -93,6 +94,15 @@ function ListCars2({ keyword }) {
     localStorage.setItem("ID", id);
   };
 
+  useEffect(() => {
+    if(location.state !== null) {
+        setToast(location.state.message)
+        setTimeout(() => {
+            setToast("")
+        }, 3000);
+    }
+  }, [])
+  
   //List Car Card
   const renderCarItem = (item) => {
     return (
