@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Recteangle from "../assets/Rectangle9.png";
-import Charts from "../assets/tes_table.png";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
+
+import useDataCars from "../store/datacar";
+import { fetchApiGet } from "../services/api";
 
 function Chart() {
+  const { dataChart, setGraphicData } = useDataCars((state) => state);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchApiGet(
+        "https://bootcamp-rent-cars.herokuapp.com/admin/order/reports?from=2022-10-01&until=2022-11-01"
+      );
+      setGraphicData({ data });
+    };
+    fetchData();
+  }, []);
+
   return (
     <div class="p-5 font-semibold text-md text-left mr-10 ">
       Dashboard
@@ -34,10 +57,24 @@ function Chart() {
             </button>
           </div>
         </div>
-
-        <div class="w-full p-4 mt-10">
-          <img src={Charts} />
-        </div>
+        <BarChart
+          width={1800}
+          height={500}
+          data={dataChart}
+          margin={{
+            top: 5,
+            right: 1,
+            left: 10,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="day" />
+          <YAxis dataKey="orderCount" />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="orderCount" fill="#586B90" />
+        </BarChart>
       </div>
     </div>
   );
