@@ -7,10 +7,10 @@ const useListCar = create(
     setList: (params) => {
       set({ listCars: params.data });
     },
-    addCar: (params) => {
-      //     let cars = listCars;
-      //     cars.push()
-      //     set({ listCars: params.data });
+    deleteCar: (params) => {
+      set((state) => ({
+        listCars: state.listCars.filter((item) => item.id !== params.id),
+      }));
     },
   }))
 );

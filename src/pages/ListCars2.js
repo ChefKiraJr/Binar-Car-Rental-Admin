@@ -99,7 +99,6 @@ function ListCars2() {
     }
   }, [])
   
-
   //List Car Card
   const renderCarItem = (item) => {
     return (

@@ -16,11 +16,6 @@ function MainDashboard() {
 
   return (
     <div className="p-6 overflow-hidden overflow-y-scroll">
-      {/* <p>
-        {data.map((e, index) => {
-          return <Table key={e.id} data={e} index={index} />;
-        })}
-      </p> */}
       <Chart />
       <Table data={data} />
       <div className="flex justify-between">

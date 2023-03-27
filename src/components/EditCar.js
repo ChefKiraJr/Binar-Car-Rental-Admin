@@ -51,8 +51,8 @@ function TestEdit() {
       )
       .then(
         (response) => {
-          var response = response.data;
-          console.log("respone", response);
+          var hasil = response.data;
+          console.log("respone", hasil);
         },
         (error) => {
           console.log("error", error);
@@ -106,9 +106,9 @@ function TestEdit() {
             <input
               className="form-input block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="hargaMobil"
-              type="text"
+              type="number"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(Number(e.target.value))}
               required
             />
           </div>
