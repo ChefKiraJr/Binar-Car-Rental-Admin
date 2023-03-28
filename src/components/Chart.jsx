@@ -58,7 +58,7 @@ function Chart() {
           </div>
         </div>
         <BarChart
-          width={1800}
+          width={1000}
           height={500}
           data={dataChart}
           margin={{

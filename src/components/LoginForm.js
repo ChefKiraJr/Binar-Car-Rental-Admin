@@ -65,9 +65,9 @@ const LoginForm = () => {
 
   return (
     <section className="h-screen">
-      <div className="lg:pr-6">
-        <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full">
-          <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-7/12 lg:w-7/12 md:w-10/12 mb-12 md:mb-0">
+      <div className="lg:pr-2">
+        <div className="flex lg:justify-between justify-center items-center flex-wrap h-full">
+          <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-7/12 md:w-10/12 mb-12 md:mb-0 ">
             <img src={Logo} className="lg:h-screen" alt="img" />
           </div>
           <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-7/12 mb-12 md:mb-0 lg:pr-16">
