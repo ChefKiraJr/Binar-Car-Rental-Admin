@@ -11,7 +11,7 @@ export default function Sidebar() {
   //   "flex items-center p-2 space-x-6 rounded-md bg-[#006DFF] text-white";
   // let inActiveClassName =
   //   "flex items-center p-2 text-gray-500 space-x-6 rounded-md hover:bg-[#006DFF] hover:text-white";
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     // <aside
@@ -52,11 +52,13 @@ export default function Sidebar() {
     //     </ul>
     //   </nav>
     // </aside>
-    <div className="flex">
+    <div className="flex min-h-max lg:h-screen">
       <div
         className={`${
           open ? "w-72" : "w-20"
-        } duration-300 h-screen bg-blue-900 relative ${!open && "bg-blue-900"}`}
+        } duration-300 min-h-screen bg-blue-900 relative ${
+          !open && "bg-blue-900"
+        }`}
       >
         <img
           src={Logo}

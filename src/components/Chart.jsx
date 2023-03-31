@@ -27,18 +27,18 @@ function Chart() {
   }, []);
 
   return (
-    <div className="p-5 font-semibold text-md text-left mr-10 ">
+    <div className="p-5 font-semibold text-md text-left mr-10 hidden md:block">
       Dashboard
-      <div className="flex flex-wrap gap-3 ml-3 mt-10">
-        <div className="justify-self-end">
+      <div className="flex flex-wrap gap-3 ml-3 mt-10 ">
+        <div className="justify-self-end ">
           <img className="w-5 h-10 md:max-xl:flex" src={Recteangle} alt="" />
         </div>
-        <div className="justify-self-start">
+        <div className="justify-self-start ">
           <div className="font-semibold">Rented Car Data Visualization</div>
         </div>
       </div>
-      <p className="text-xs ml-4 mt-5 text-left">Month</p>
-      <div className="inset-y-0 left-0 mt-5 ml-3">
+      <p className="text-xs ml-4 mt-5 text-left ">Month</p>
+      <div className="inset-y-0 left-0 mt-5 ml-3 ">
         <div className="mb-3 xl:w-96">
           <div className="input-group flex flex-wrap items-stretch w-40 mb-4">
             <input
@@ -58,7 +58,8 @@ function Chart() {
           </div>
         </div>
         <BarChart
-          width={1000}
+          className=""
+          width={1100}
           height={500}
           data={dataChart}
           margin={{

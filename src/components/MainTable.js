@@ -82,61 +82,61 @@ function MainTable() {
         onChange={handleSearchChange}
       /> */}
       <div className="justify-self-end">
-        <div class="p-5 font-semibold text-md text-left mr-10 ">Dashboard</div>
+        <div className="font-semibold text-md text-left mr-10 pt-4">
+          Dashboard
+        </div>
         <div className="flex flex-wrap gap-3 ml-3 mt-10">
           <div className="justify-self-end">
-            <img
-              classNameName="w-5 h-10 md:max-xl:flex"
-              src={Recteangle}
-              alt=""
-            />
+            <img className="w-5 h-10 md:max-xl:flex" src={Recteangle} alt="" />
           </div>
           <div className="justify-self-start">
             <div className="font-semibold">List Order</div>
           </div>
         </div>
-        <Table className="mt-10">
-          <TableHead className="text-xs text-gray-700 uppercase bg-[#CFD4ED] dark:bg-gray-700 dark:text-gray-400">
-            <TableRow>
-              <TableCell onClick={() => handleSortClick("number")}>
-                No
-              </TableCell>
-              <TableCell onClick={() => handleSortClick("email")}>
-                user email
-              </TableCell>
-              <TableCell onClick={() => handleSortClick("phone")}>
-                Car
-              </TableCell>
-              <TableCell onClick={() => handleSortClick("website")}>
-                Start Rent
-              </TableCell>
-              <TableCell onClick={() => handleSortClick("website")}>
-                Finish Rent
-              </TableCell>
-              <TableCell onClick={() => handleSortClick("website")}>
-                Price
-              </TableCell>
-              <TableCell onClick={() => handleSortClick("website")}>
-                Category
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedData
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
-                <TableRow key={row.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.User.email}</TableCell>
-                  <TableCell>{row.Car.name}</TableCell>
-                  <TableCell>{row.start_rent_at}</TableCell>
-                  <TableCell>{row.finish_rent_at}</TableCell>
-                  <TableCell>{row.Car.price}</TableCell>
-                  <TableCell>{row.Car.category}</TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+        <div>
+          <Table className="mt-10 sm:overflow-x-auto bg-slate-200">
+            <TableHead className="text-xs text-gray-700 uppercase bg-[#CFD4ED] dark:bg-gray-700 dark:text-gray-400">
+              <TableRow>
+                <TableCell onClick={() => handleSortClick("number")}>
+                  No
+                </TableCell>
+                <TableCell onClick={() => handleSortClick("email")}>
+                  user email
+                </TableCell>
+                <TableCell onClick={() => handleSortClick("phone")}>
+                  Car
+                </TableCell>
+                <TableCell onClick={() => handleSortClick("website")}>
+                  Start Rent
+                </TableCell>
+                <TableCell onClick={() => handleSortClick("website")}>
+                  Finish Rent
+                </TableCell>
+                <TableCell onClick={() => handleSortClick("website")}>
+                  Price
+                </TableCell>
+                <TableCell onClick={() => handleSortClick("website")}>
+                  Category
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedData
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                  <TableRow key={row.id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{row.User.email}</TableCell>
+                    <TableCell>{row.Car.name}</TableCell>
+                    <TableCell>{row.start_rent_at}</TableCell>
+                    <TableCell>{row.finish_rent_at}</TableCell>
+                    <TableCell>{row.Car.price}</TableCell>
+                    <TableCell>{row.Car.category}</TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </div>
         <TablePagination
           // rowsPerPageOptions={[5, 10, 25]}
           // component="div"

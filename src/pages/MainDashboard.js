@@ -15,7 +15,7 @@ function MainDashboard() {
   }, []);
 
   return (
-    <div className="p-6 overflow-hidden overflow-y-scroll">
+    <div className="px-6 overflow-hidden overflow-y-scroll">
       <Chart />
       <MainTable data={data} />
       {/* <div className="flex justify-between">

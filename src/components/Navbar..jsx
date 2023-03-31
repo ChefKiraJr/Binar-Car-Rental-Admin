@@ -43,7 +43,7 @@ export default function Navbar({ onSearch = () => {} }) {
       <div className="flex justify-between px-5 gap-10">
         {/* <form className="top-0"> */}
         <label
-          for="default-search"
+          htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
         >
           Search
