@@ -31,12 +31,12 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
       <div class="flex items-center space-x-2">
-        <button
+        {/* <button
           className="text-3xl text-gray-700 hover:text-gray-600 focus:outline-none"
           onClick={toggleAside}
         >
           <i className="bx bx-menu"></i>
-        </button>
+        </button> */}
         <div>Binal Car Rental</div>
       </div>
       <div className="flex justify-between px-5 gap-10">
