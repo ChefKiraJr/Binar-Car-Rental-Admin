@@ -10,16 +10,18 @@ import useListCar from "../store/listCar";
 import Modal from "../components/Modal";
 import DeleteCars from "../components/DeleteCars";
 import Toast from "../components/Toast";
+import { useOutletContext } from "react-router-dom";
 
-function ListCars2() {
+function ListCars2({ keyword }) {
   const [filteredCars, setFilteredCars] = useState([]);
   const [category, setCategory] = useState("all");
-  const location = useLocation()
   const { listCars, setList, deleteCar } = useListCar((state) => state);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   const [modal, setModal] = useState(false);
   const [id, setId] = useState("");
   const [toast, setToast] = useState("");
+  const context = useOutletContext();
 
   //Get List data
   async function getCarData() {
@@ -91,14 +93,14 @@ function ListCars2() {
   };
 
   useEffect(() => {
-    if(location.state !== null) {
-        setToast(location.state.message)
-        setTimeout(() => {
-            setToast("")
-        }, 3000);
+    if (location.state !== null) {
+      setToast(location.state.message);
+      setTimeout(() => {
+        setToast("");
+      }, 3000);
     }
-  }, [])
-  
+  }, []);
+
   //List Car Card
   const renderCarItem = (item) => {
     return (
@@ -160,7 +162,7 @@ function ListCars2() {
       ) : null}
       {toast === "" ? null : <Toast message={toast} status={"success"} />}
 
-      <div className="p-8 lg:mt-0 shadow bg-slate-300 h-max w-full">
+      <div className="p-8 lg:mt-0 shadow bg-slate-300 min-h-full w-full">
         <div className="flex">
           <p className="font-bold">Cars &gt;</p>
           <p className="font-normal pl-2"> List Car</p>
