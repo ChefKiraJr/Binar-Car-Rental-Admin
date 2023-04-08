@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import React, { useEffect, useState } from "react";
-// import logo from "../../assets/logo-1.png";
 import { motion } from "framer-motion";
 
 // * React icons
@@ -151,5 +150,3 @@ const Sidebar = () => {
         </div>
     );
 };
-
-export default Sidebar;
