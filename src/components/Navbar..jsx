@@ -31,7 +31,6 @@ export default function Navbar({ onSearch = () => {} }) {
   };
   return (
     <div className="sticky top-0 flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
-      </div>
       <div className="flex justify-between px-5 gap-10">
         <label
           htmlFor="default-search"
