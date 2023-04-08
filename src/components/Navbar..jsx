@@ -32,16 +32,9 @@ export default function Navbar({ onSearch = () => {} }) {
   return (
     <div className="sticky top-0 flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
       <div className="flex items-center space-x-2">
-        {/* <button
-          className="text-3xl text-gray-700 hover:text-gray-600 focus:outline-none"
-          onClick={toggleAside}
-        >
-          <i className="bx bx-menu"></i>
-        </button> */}
         <div className="font-bold">Binar Car Rental</div>
       </div>
       <div className="flex justify-between px-5 gap-10">
-        {/* <form className="top-0"> */}
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -84,8 +77,6 @@ export default function Navbar({ onSearch = () => {} }) {
             Search
           </button>
         </div>
-        {/* </form> */}
-
         <div className="my-auto">
           <button
             className="flex items-center space-x-1 focus:outline-none"
@@ -96,10 +87,9 @@ export default function Navbar({ onSearch = () => {} }) {
               alt="plchldr.co"
               className="h-9 w-9 rounded-full"
             />
-            <div className="font-medium">Binar Admin</div>
+            <div className="font-medium hidden md:block">Binar Admin</div>
           </button>
 
-          {/* profile dropdown */}
           {profileOpen && (
             <div className="absolute right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md border border-gray-200 bg-white shadow-md">
               <div className="flex items-center space-x-2 p-2">
@@ -135,7 +125,6 @@ export default function Navbar({ onSearch = () => {} }) {
               </div>
             </div>
           )}
-          {/* end profile dropdown */}
         </div>
       </div>
     </div>

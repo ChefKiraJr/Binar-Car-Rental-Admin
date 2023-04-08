@@ -128,8 +128,8 @@ function MainTable() {
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{row.User.email}</TableCell>
                     <TableCell>{row.Car.name}</TableCell>
-                    <TableCell>{row.start_rent_at}</TableCell>
-                    <TableCell>{row.finish_rent_at}</TableCell>
+                    <TableCell>{row.start_rent_at.split("T")[0]}</TableCell>
+                    <TableCell>{row.finish_rent_at.split("T")[0]}</TableCell>
                     <TableCell>{row.Car.price}</TableCell>
                     <TableCell>{row.Car.category}</TableCell>
                   </TableRow>
@@ -138,13 +138,6 @@ function MainTable() {
           </Table>
         </div>
         <TablePagination
-          // rowsPerPageOptions={[5, 10, 25]}
-          // component="div"
-          // count={filteredData.length}
-          // rowsPerPage={rowsPerPage}
-          // page={page}
-          // onChangePage={handleChangePage}
-          // onChangeRowsPerPage={handleChangeRowsPerPage}
           rowsPerPageOptions={[5, 25, 50, { label: "All", value: -1 }]}
           colSpan={3}
           count={filteredData.length}

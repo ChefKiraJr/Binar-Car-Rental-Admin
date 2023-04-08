@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import Chart from "../components/Chart";
-import Pagination from "../components/Pagination";
 import MainTable from "../components/MainTable";
-import TableSetting from "../components/TableSetting";
 import useDatas from "../store/data";
 
 function MainDashboard() {
@@ -15,13 +13,9 @@ function MainDashboard() {
   }, []);
 
   return (
-    <div className="px-6 overflow-hidden overflow-y-scroll">
+    <div className="px-6 ">
       <Chart />
       <MainTable data={data} />
-      {/* <div className="flex justify-between">
-        <TableSetting />
-        <Pagination />
-      </div> */}
     </div>
   );
 }
