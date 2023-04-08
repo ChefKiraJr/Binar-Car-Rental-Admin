@@ -16,12 +16,10 @@ function ListCars2({ keyword }) {
   const [filteredCars, setFilteredCars] = useState([]);
   const [category, setCategory] = useState("all");
   const { listCars, setList, deleteCar } = useListCar((state) => state);
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const [modal, setModal] = useState(false);
   const [id, setId] = useState("");
   const [toast, setToast] = useState("");
-  const context = useOutletContext();
 
   //Get List data
   async function getCarData() {
