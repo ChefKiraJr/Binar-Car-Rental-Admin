@@ -127,11 +127,11 @@ function MainTable() {
                   <TableRow key={row.id}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{row.User.email}</TableCell>
-                    <TableCell>{row.Car.name}</TableCell>
+                    <TableCell>{row.Car?.name}</TableCell>
                     <TableCell>{row.start_rent_at.split("T")[0]}</TableCell>
                     <TableCell>{row.finish_rent_at.split("T")[0]}</TableCell>
-                    <TableCell>{row.Car.price}</TableCell>
-                    <TableCell>{row.Car.category}</TableCell>
+                    <TableCell>{row.Car?.price}</TableCell>
+                    <TableCell>{row.Car?.category}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>
