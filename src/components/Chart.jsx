@@ -8,24 +8,40 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
+import moment from "moment";
 import useDataCars from "../store/datacar";
 import { fetchApiGet } from "../services/api";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+import dayjs from "dayjs";
 
 function Chart() {
   const { dataChart, setGraphicData } = useDataCars((state) => state);
-
+  const fetchData = async () => {
+    const data = await fetchApiGet(
+      `https://bootcamp-rent-cars.herokuapp.com/admin/order/reports?from=${startDate}&until=${endDate}`
+    );
+    setGraphicData({ data });
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchApiGet(
-        "https://bootcamp-rent-cars.herokuapp.com/admin/order/reports?from=2022-10-01&until=2022-11-01"
-      );
-      setGraphicData({ data });
-    };
     fetchData();
   }, []);
 
+  const [startDate, setStartDate] = useState(dayjs().format("YYYY-MM-DD"));
+  console.log(startDate, "tes value month");
+  const handleDateChange = (date) => {
+    setStartDate(dayjs(date).format("YYYY-MM-DD"));
+  };
+  const [endDate, setEndDate] = useState(dayjs().format("YYYY-MM-DD"));
+  console.log(endDate, "tes value month");
+  const handleEndDateChange = (date) => {
+    setEndDate(dayjs(date).format("YYYY-MM-DD"));
+  };
   return (
     <div className="p-5 font-semibold text-md text-left mr-10 hidden md:block">
       Dashboard
@@ -37,33 +53,41 @@ function Chart() {
           <div className="font-semibold">Rented Car Data Visualization</div>
         </div>
       </div>
+      <p className="mt-5">From</p>
+      <DatePicker
+        className="mt-5"
+        selected={dayjs(startDate).toDate()}
+        onChange={handleDateChange}
+        dateFormat="yyyy-MM-dd"
+      />
+      <p className="mt-5">Until</p>
+      <DatePicker
+        className="mt-5"
+        selected={dayjs(endDate).toDate()}
+        onChange={handleEndDateChange}
+        dateFormat="yyyy-MM-dd"
+      />
+      <button
+        onClick={fetchData}
+        className=" mt-5 btn px-4 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+        type="button"
+        id="button-addon2"
+      >
+        Go
+      </button>
       <p className="text-xs ml-4 mt-5 text-left ">Month</p>
       <div className="inset-y-0 left-0 mt-5 ml-3 ">
-        <div className="mb-3 xl:w-96">
-          <div className="input-group flex flex-wrap items-stretch w-40 mb-4">
-            <input
-              type="search"
-              className="form-control  flex-auto min-w-0 block w-10 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Search"
-              aria-label="Search"
-              aria-describedby="button-addon2"
-            />
-            <button
-              className="btn px-4 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
-              type="button"
-              id="button-addon2"
-            >
-              Go
-            </button>
-          </div>
-        </div>
+        <form>
+          <div className="mb-3 xl:w-96"></div>
+        </form>
+        {/* <ResponsiveContainer> */}
         <BarChart
           className=""
           width={1100}
           height={500}
           data={dataChart}
           margin={{
-            top: 5,
+            top: 10,
             right: 1,
             left: 10,
             bottom: 5,
@@ -76,6 +100,7 @@ function Chart() {
           <Legend />
           <Bar dataKey="orderCount" fill="#586B90" />
         </BarChart>
+        {/* </ResponsiveContainer> */}
       </div>
     </div>
   );
